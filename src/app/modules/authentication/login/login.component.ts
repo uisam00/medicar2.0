@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LocalStorage, SessionStorage } from 'src/app/shared/models/constants';
+import { LocalStorage } from 'src/app/shared/models/constants';
 import { Pages } from 'src/app/shared/models/pages';
 import { AuthService } from '../../../core/services/auth.service';
 
@@ -15,12 +15,12 @@ import { UserCredentials } from 'src/app/shared/models/user-credentials';
 })
 export class LoginComponent implements OnInit {
 
-  
+
   hidePassword = true;
-  form!: FormGroup; 
+  form!: FormGroup;
 
   get controls() { return this.form.controls; }
-  
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -31,37 +31,32 @@ export class LoginComponent implements OnInit {
     this.createForm();
   }
 
-  createForm(){
+  createForm() {
     this.form = this.formBuilder.group({
       user: ['', [Validators.required]],
       password: ['', [Validators.required]],
-      rememberPassword: [false ],
+      rememberPassword: [false],
     });
   }
-  
-  login() {    
+
+  login() {
     if (!this.form.valid) {
       return;
     }
-   const credentials = this.getCredentials();
-    this.authService.login(credentials)
-      .then(response => {
-        this.authService.handleResponse(response);
-        if (response?.token) {
-          let user = response;
-          if(this.controls["rememberPassword"].value){
-            localStorage.setItem(LocalStorage.token, user.token);
-            localStorage.setItem(LocalStorage.username, credentials.username );
-          }else{
-            sessionStorage.setItem(SessionStorage.token, user.token);
-            sessionStorage.setItem(SessionStorage.username, credentials.username);
-          }
-          this.authService.saveToken()
-          this.router.navigate([Pages.ClinicalConsultations.initialRoute]);
-        }else{
+    const credentials = this.getCredentials();
 
-        }
-      });
+    this.authService.login(credentials).subscribe(
+      () => {
+        this.router.navigate([Pages.ClinicalConsultations.initialRoute]);
+      },
+      (error: any) => {
+        console.error(error);
+
+        // if (error.status == 401)
+        //  this.toaster.error('usuário ou senha inválido');
+        // else console.error(error);
+      }
+    );
   }
 
   getCredentials(): UserCredentials {
@@ -71,7 +66,7 @@ export class LoginComponent implements OnInit {
     return credentials;
   }
 
-  goToSignup(){
+  goToSignup() {
     this.router.navigate([Pages.Authentication.signup]);
 
   }

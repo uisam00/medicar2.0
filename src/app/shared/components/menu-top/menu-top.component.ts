@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { Notifications } from '../../models/notifications';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-menu-top',
@@ -9,10 +10,11 @@ import { Notifications } from '../../models/notifications';
   styleUrls: ['./menu-top.component.scss']
 })
 export class MenuTopComponent implements OnInit {
-  username: string = '';
+  primeiroNome: string = '';
 
   constructor(private authService: AuthService, protected notification: NotificationService,) {
-    this.username = authService.getUsername;
+    let user: User = this.authService.getCurrentUser()
+    this.primeiroNome = user.primeiroNome;
   }
 
   ngOnInit(): void {

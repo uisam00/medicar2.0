@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "https://localhost:7261",
+    "secure": false
+  },
+  "/api-auth": {
+    "target": "http://localhost:7271",
+    "secure": false
+  }
+}

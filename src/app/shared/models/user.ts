@@ -1,6 +1,9 @@
-
 export class User {
-    username!: string;
-    email!: string;
-    token!: string;
+  userName!: string;
+  email!: string;
+  password!: string;
+  primeiroNome!: string;
+  ultimoNome!: string;
+  accessToken!: string;
+  refreshToken!: string;
 }

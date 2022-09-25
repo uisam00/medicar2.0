@@ -24,4 +24,10 @@ export class ConfigService {
         }
         return this.config.urlApi;
     }
+    get urlAuthApi() {
+      if (!this.config) {
+          throw Error("Erro na configuração da API de Autenticação.");
+      }
+      return this.config.urlAuthApi;
+  }
 }

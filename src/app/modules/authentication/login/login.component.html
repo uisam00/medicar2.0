@@ -9,9 +9,9 @@
         <form (keyup.enter)="login()"  [formGroup]="form">
           <!-- (keyup.enter)="keyDownFunction()" -->
           <mat-form-field appearance="outline" class="full-width w-100">
-            <mat-label>Email ou Login</mat-label>
+            <mat-label>Nome de usuário</mat-label>
             <input matInput formControlName="user" maxlength="100" required autocomplete="off">
-  
+
             <mat-error *ngIf="controls['user'].hasError('required')">
               Usuário é <strong>obrigatório</strong>
             </mat-error>
@@ -34,11 +34,11 @@
         <div class="d-flex justify-content-between">
           <button mat-button color="primary" class="button-auth text-strong" (click)="goToSignup()" >
             Criar Conta
-          </button> 
+          </button>
           <button mat-flat-button color="primary" class="button-auth text-strong" (click)="login()" [disabled]="!this.form.valid">
             Acessar
-          </button>  
-        </div>        
+          </button>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>

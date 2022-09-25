@@ -18,12 +18,12 @@ export class NewConsultationComponent implements OnInit {
   schedules: Schedule[] = [];
   horary!: any[];
 
-  form!: FormGroup; 
+  form!: FormGroup;
 
   get controls() { return this.form.controls; }
-  
+
     constructor(
-      private consuService: ClinicalConsultationsService, 
+      private consuService: ClinicalConsultationsService,
       private formBuilder: FormBuilder,
       private dialogRef: MatDialogRef<NewConsultationComponent>) { }
 
@@ -31,7 +31,7 @@ export class NewConsultationComponent implements OnInit {
     this.createForm();
     this.getSpecialties()
   }
-  
+
   createForm() {
     this.form = this.formBuilder.group({
       specialtyId: [null,],
@@ -49,34 +49,34 @@ export class NewConsultationComponent implements OnInit {
     this.controls['hour'].disable();
   }
 
-  getSpecialties() {    
+  getSpecialties() {
     this.consuService.getSpecialties()
       .then(response => {
         this.consuService.handleResponse(response);
         if (response) {
           this.specialties = response;
-          
+
         }
       });
   }
 
   onSelectSpecialty(){
-    this.controls['doctorId'].setValue(null); 
-    this.controls['scheduleId'].setValue(null); 
-    this.controls['hour'].setValue(null); 
+    this.controls['doctorId'].setValue(null);
+    this.controls['scheduleId'].setValue(null);
+    this.controls['hour'].setValue(null);
     this.disableAllForm();
     this.getDoctorsBySpecialty();
   }
 
   onSelectDoctor(){
-    this.controls['scheduleId'].setValue(null); 
-    this.controls['hour'].setValue(null); 
-    this.controls['hour'].disable(); 
+    this.controls['scheduleId'].setValue(null);
+    this.controls['hour'].setValue(null);
+    this.controls['hour'].disable();
     this.getSchedulesByDoctor();
   }
 
   onSelectSchedule(){
-    this.controls['hour'].setValue(null); 
+    this.controls['hour'].setValue(null);
     this.getHorary();
   }
 
@@ -123,7 +123,7 @@ export class NewConsultationComponent implements OnInit {
       .then(response => {
         this.consuService.handleResponse(response);
         if (response) {
-          this.schedules = response.filter(x=> x.medico.id == doctorId);
+          this.schedules = response;
           if(this.schedules.length){
             this.controls["scheduleId"].enable();
           }else{
@@ -142,7 +142,7 @@ export class NewConsultationComponent implements OnInit {
       .then(response => {
         this.consuService.handleResponse(response);
         if (response) {
-          this.dialogRef.close(response); 
+          this.dialogRef.close(response);
         }
       });
   }
@@ -152,7 +152,7 @@ export class NewConsultationComponent implements OnInit {
     const hour = this.controls["hour"].value;
     return new NewConsultationRequest(scheduleId, hour)
   }
-  
+
   cancel(){
     this.dialogRef.close();
   }

@@ -26,8 +26,10 @@ export class BaseService {
         let messages = response.errors as Array<string>
         return messages != null && messages.length > 0;
     }
-
     get urlApi(): string {
-        return this.configService.urlApi;
+      return this.configService.urlApi;
+    }
+    get urlAuthApi(): string {
+        return this.configService.urlAuthApi;
     }
 }

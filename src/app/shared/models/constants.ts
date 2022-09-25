@@ -1,23 +1,17 @@
 export const LocalStorage = {
-    token: 'token',
-    username: 'username',
-}
-export const SessionStorage = {
-    token: 'token',
-    username: 'username'
+    user: 'user',
 }
 
 export const ROUTES_USER_API = {
-    login:'users/login',
-    signup:'users',
-
+    login:'usuario/login',
+    refreshToken:'usuario/refresh-token',
 }
 
 export const ROUTES_CONSULTATION_API = {
-    consultation: 'consultas/',
-    getSpecialties: 'especialidades/',
-    getDoctors: 'medicos/',
-    getSchedules: 'agendas/'
+    consultation: 'consulta/',
+    getSpecialties: 'especialidade/',
+    getDoctors: 'medico/',
+    getSchedules: 'agenda/',
 
 }
 export const Message = {

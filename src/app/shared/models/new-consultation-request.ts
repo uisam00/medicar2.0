@@ -1,8 +1,8 @@
 export class NewConsultationRequest {
-    agenda_id: number;
+    idAgenda: number;
     horario: any;
-    constructor(agenda_id:number, horario:any){
-        this.agenda_id = agenda_id;
+    constructor(idAgenda:number, horario:any){
+        this.idAgenda = idAgenda;
         this.horario = horario;
     }
 }
